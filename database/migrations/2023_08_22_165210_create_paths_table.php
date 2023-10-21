@@ -13,17 +13,23 @@ return new class extends Migration
     {
         Schema::create('paths', function (Blueprint $table) {
             $table->id();
-            $table->string('departurePoint');
-            $table->string('arrivalPoint');
-            $table->datetime('dateTimeDeparture');
-            $table->datetime('dateTimeArrival');
-            $table->integer('placeNumberMax');
-            $table->float('weightPackageMax');
+
+            $table->unsignedBigInteger('departure_city');
+            $table->foreign('departure_city')->references('id')->on('villes');
+
+            $table->unsignedBigInteger('arrival_city');
+            $table->foreign('arrival_city')->references('id')->on('villes');
+
+
+            $table->time('time_departure');
+            $table->time('duration_path');
+
+            $table->integer('place_number_max');
+
             $table->float('price');
-            $table->string('transport');
-            $table->date('publishDate');
+
             $table->date('dateEndBooking');
-            $table->foreignId('ville_id')->constrained();
+            
             $table->timestamps();
         });
     }

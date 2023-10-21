@@ -13,7 +13,10 @@ return new class extends Migration
     {
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
-            $table->string('ticketNumber');
+            $table->string('ticket_number');
+            $table->date('day');
+            $table->integer('places');
+            $table->foreignId('paths_id')->constrained();
             $table->timestamps();
         });
     }
